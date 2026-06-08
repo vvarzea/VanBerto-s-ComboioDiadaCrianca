@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0067)https://dynamic-robot-start.preview.emergentagent.com/vanberto.html -->
+<html lang="pt"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>Dia da Criança 🎈</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+<link href="./Dia da Criança 🎈_files/css2" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;user-select:none;-webkit-tap-highlight-color:transparent;}
 html,body{width:100%;height:100%;overflow:hidden;background:#05091a;position:fixed;touch-action:none;}
@@ -23,6 +23,124 @@ body::before{content:'';position:fixed;inset:0;z-index:0;
 @keyframes vbFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
 @keyframes vbBlink{0%,92%,100%{transform:scaleY(0);}95%{transform:scaleY(1);}}
 @keyframes waveVB{0%{transform:rotate(0deg);}25%{transform:rotate(-18deg);}50%{transform:rotate(0deg);}75%{transform:rotate(-18deg);}100%{transform:rotate(0deg);}}
+@keyframes waveVBLeft{0%{transform:rotate(0deg);}25%{transform:rotate(18deg);}50%{transform:rotate(0deg);}75%{transform:rotate(18deg);}100%{transform:rotate(0deg);}}
+/* Robô dinâmico: flutuação + sway + rotação ligeira */
+@keyframes vbBob{
+  0%   {transform:translate(0,0) rotate(0deg);}
+  20%  {transform:translate(-3px,-8px) rotate(-3deg);}
+  50%  {transform:translate(0,-12px) rotate(0deg);}
+  80%  {transform:translate(3px,-8px) rotate(3deg);}
+  100% {transform:translate(0,0) rotate(0deg);}
+}
+/* Halo / brilho pulsante por baixo do robô */
+@keyframes vbHalo{
+  0%,100%{opacity:0.55;transform:translateX(-50%) scale(0.9);}
+  50%    {opacity:1;   transform:translateX(-50%) scale(1.15);}
+}
+/* Antena com pulsação luminosa */
+@keyframes vbAntenna{
+  0%,100%{r:2.5; opacity:1;   filter:drop-shadow(0 0 2px #38bdf8);}
+  50%    {r:3.6; opacity:0.85;filter:drop-shadow(0 0 8px #38bdf8);}
+}
+/* Pop-in do balão quando a mensagem muda */
+@keyframes vbBalloonPop{
+  0%  {transform:scale(0.85) translateY(4px); opacity:0;}
+  60% {transform:scale(1.05) translateY(-2px); opacity:1;}
+  100%{transform:scale(1) translateY(0); opacity:1;}
+}
+/* Respiração subtil do balão (idle) */
+@keyframes vbBalloonIdle{
+  0%,100%{transform:translateY(0);}
+  50%    {transform:translateY(-3px);}
+}
+/* ── Robô MASCOTE LIVRE (flutua pelo ecrã) ── */
+@keyframes vbWander{
+  0%   {transform:translate(0,0) rotate(0deg);}
+  15%  {transform:translate(-22px,-14px) rotate(-4deg);}
+  30%  {transform:translate(-40px,-6px)  rotate(3deg);}
+  45%  {transform:translate(-28px,-20px) rotate(-3deg);}
+  60%  {transform:translate(-10px,-8px)  rotate(4deg);}
+  75%  {transform:translate(-30px,-18px) rotate(-2deg);}
+  100% {transform:translate(0,0) rotate(0deg);}
+}
+@keyframes vbHaloFree{
+  0%,100%{opacity:0.5; transform:translateX(-50%) scale(0.85);}
+  50%    {opacity:1;   transform:translateX(-50%) scale(1.2);}
+}
+@keyframes vbBubbleIn{
+  0%  {opacity:0; transform:scale(0.6) translateY(6px);}
+  60% {opacity:1; transform:scale(1.08) translateY(-2px);}
+  100%{opacity:1; transform:scale(1) translateY(0);}
+}
+@keyframes vbBubbleFloat{
+  0%,100%{transform:translateY(0);}
+  50%    {transform:translateY(-4px);}
+}
+.vb-free{
+  position:absolute;
+  right:clamp(14px,4vw,42px);
+  bottom:clamp(14px,4vw,42px);
+  width:clamp(78px,14vw,120px);
+  z-index:5;
+  pointer-events:none;
+  animation:vbWander 9s ease-in-out infinite;
+  filter:drop-shadow(0 10px 22px rgba(56,189,248,0.55));
+}
+.vb-free svg{display:block;width:100%;height:auto;}
+.vb-free::before{
+  content:'';
+  position:absolute;
+  left:50%; bottom:-10px;
+  width:78%; height:18px;
+  background:radial-gradient(ellipse at center,rgba(56,189,248,0.6),rgba(56,189,248,0) 70%);
+  transform:translateX(-50%);
+  filter:blur(6px);
+  animation:vbHaloFree 2.4s ease-in-out infinite;
+  pointer-events:none;
+  z-index:-1;
+}
+.vb-free-bubble{
+  position:absolute;
+  bottom:calc(100% + 14px);
+  right:0;
+  background:linear-gradient(135deg,#2a0a4e,#1a0835);
+  border:3px solid #ff6b35;
+  outline:2px solid rgba(255,215,0,0.3);outline-offset:-4px;
+  border-radius:20px;
+  padding:10px 14px 9px;
+  font-family:'Fredoka One',cursive;
+  color:#fff8e0;
+  font-size:clamp(11px,2.6vw,14px);
+  text-align:center;
+  line-height:1.3;
+  white-space:normal;
+  max-width:min(260px,62vw);
+  box-shadow:4px 4px 0 rgba(5,2,15,0.8), 0 0 24px rgba(255,107,53,0.45), inset 0 1px 0 rgba(255,255,255,0.08);
+  animation:vbBubbleFloat 3s ease-in-out infinite;
+  transform-origin:80% 100%;
+}
+.vb-free-bubble.pop{animation:vbBubbleIn 0.45s cubic-bezier(.34,1.56,.64,1) 1, vbBubbleFloat 3s ease-in-out 0.45s infinite;}
+.vb-free-bubble::after{
+  content:'';
+  position:absolute;
+  bottom:-13px; right:22px;
+  width:0;height:0;
+  border-left:9px solid transparent;
+  border-right:9px solid transparent;
+  border-top:14px solid #ff6b35;
+}
+.vb-free-bubble::before{
+  content:'';
+  position:absolute;
+  bottom:-8px; right:25px;
+  width:0;height:0;
+  border-left:6px solid transparent;
+  border-right:6px solid transparent;
+  border-top:10px solid #1a0835;
+  z-index:1;
+}
+/* Esconder o robô antigo dentro do modal */
+.modal-vb{display:none !important;}
 @keyframes starsTwinkle{0%{opacity:0.5;}50%{opacity:1;}100%{opacity:0.6;}}
 .modal-hero{background:linear-gradient(160deg,#1a0800,#0d0a00);padding:clamp(10px,3vw,20px) clamp(12px,4vw,26px) clamp(8px,2vw,14px);text-align:center;position:relative;overflow:hidden;}
 .modal-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 25%,rgba(255,180,0,0.20),transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(255,120,0,0.15),transparent 55%);pointer-events:none;}
@@ -30,9 +148,60 @@ body::before{content:'';position:fixed;inset:0;z-index:0;
 .modal-title{font-family:'Fredoka One',cursive;font-size:clamp(20px,5.5vw,40px);color:#FFB300;text-shadow:0 0 28px rgba(255,180,0,0.6),0 4px 0 rgba(0,0,0,0.4);margin-bottom:3px;}
 .modal-sub{color:rgba(255,255,255,0.5);font-size:clamp(9px,2.5vw,12px);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
 .modal-vb{display:flex;align-items:center;justify-content:center;gap:10px;margin:4px 0 8px;}
-.modal-vb-robot{width:clamp(44px,12vw,68px);animation:vbFloat 3s ease-in-out infinite;}
-.modal-vb-balloon{background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,180,0,0.55);border-radius:14px;padding:7px 11px;font-family:'Fredoka One',cursive;color:#FFB300;font-size:clamp(11px,3vw,13px);text-align:left;position:relative;max-width:min(240px,54vw);}
-.modal-vb-balloon::before{content:'';position:absolute;left:-10px;top:16px;border-top:7px solid transparent;border-bottom:7px solid transparent;border-right:11px solid rgba(255,180,0,0.55);}
+.modal-vb-robot{
+  width:clamp(44px,12vw,68px);
+  animation:vbBob 3.4s ease-in-out infinite;
+  position:relative;
+  filter:drop-shadow(0 6px 14px rgba(56,189,248,0.45));
+  transform-origin:50% 80%;
+}
+/* Halo luminoso atrás/abaixo do robô */
+.modal-vb-robot::before{
+  content:'';
+  position:absolute;
+  left:50%;bottom:-6px;
+  width:80%;height:14px;
+  background:radial-gradient(ellipse at center,rgba(56,189,248,0.55),rgba(56,189,248,0) 70%);
+  transform:translateX(-50%);
+  filter:blur(4px);
+  animation:vbHalo 2.6s ease-in-out infinite;
+  pointer-events:none;
+  z-index:-1;
+}
+.modal-vb-balloon{
+  background:linear-gradient(135deg,#2a0a4e,#1a0835);
+  border:3px solid #ff6b35;
+  outline:2px solid rgba(255,215,0,0.3);outline-offset:-4px;
+  border-radius:20px;
+  padding:9px 14px 8px;
+  box-shadow:4px 4px 0 rgba(5,2,15,0.8), 0 0 20px rgba(255,107,53,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(11px,3vw,14px);
+  color:#fff8e0;
+  text-align:left;
+  line-height:1.3;
+  max-width:min(240px,54vw);
+  position:relative;
+  animation:vbBalloonIdle 3s ease-in-out infinite;
+}
+.modal-vb-balloon.pop{animation:vbBalloonPop 0.45s cubic-bezier(.34,1.56,.64,1) 1, vbBalloonIdle 3s ease-in-out 0.45s infinite;}
+.modal-vb-balloon::before{
+  content:'';position:absolute;
+  left:-13px;top:14px;
+  width:0;height:0;
+  border-top:9px solid transparent;
+  border-bottom:9px solid transparent;
+  border-right:14px solid #ff6b35;
+}
+.modal-vb-balloon::after{
+  content:'';position:absolute;
+  left:-8px;top:17px;
+  width:0;height:0;
+  border-top:6px solid transparent;
+  border-bottom:6px solid transparent;
+  border-right:10px solid #1a0835;
+  z-index:1;
+}
 .modal-balloons{display:flex;justify-content:center;align-items:flex-end;gap:6px;flex-wrap:nowrap;margin:4px 0 18px;padding-bottom:14px;}
 .modal-balloon{
   border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
@@ -118,64 +287,85 @@ canvas{display:block;width:100%;height:100%;touch-action:none;}
 </style>
 </head>
 <body>
-<div id="loadscreen" style="position:fixed;inset:0;background:#05091a;display:flex;align-items:center;justify-content:center;z-index:999;flex-direction:column;gap:14px">
-  <div style="font-family:'Fredoka One',cursive;color:#FFB300;font-size:28px;">🎈 Dia da Criança 🎉</div>
-  <div style="color:rgba(255,255,255,0.45);font-size:13px">A carregar...</div>
-</div>
+
 
 <div id="wrap">
   <div id="hud">
     <div style="display:flex;flex-direction:column;flex-shrink:0;min-width:75px">
-      <span id="lvlTxt">Nível 1/10</span><span id="themeTxt" style="font-size:10px;color:rgba(255,220,120,0.85);font-weight:700;margin-left:3px;font-family:'Fredoka One',cursive;letter-spacing:0.5px;transition:opacity 0.6s,color 0.6s;text-shadow:0 0 8px rgba(255,180,0,0.5);"></span>
-      <span id="ptsTxt">&#11088; 0</span><span id="recTxt" style="font-size:8px;color:rgba(255,215,0,0.35);font-weight:700;margin-left:3px;display:none">&#127942; 0</span>
+      <span id="lvlTxt">Nível 1/10</span><span id="themeTxt" style="font-size:10px;color:rgba(255,220,120,0.85);font-weight:700;margin-left:3px;font-family:&#39;Fredoka One&#39;,cursive;letter-spacing:0.5px;transition:opacity 0.6s,color 0.6s;text-shadow:0 0 8px rgba(255,180,0,0.5);"></span>
+      <span id="ptsTxt">⭐ 0</span><span id="recTxt" style="font-size:8px;color:rgba(255,215,0,0.35);font-weight:700;margin-left:3px;display:none">🏆 0</span>
     </div>
-    <span id="playerName" style="font-family:'Fredoka One',cursive;color:#FFB300;font-size:clamp(11px,2.8vw,15px);white-space:nowrap;flex-shrink:0;text-shadow:0 0 10px rgba(255,180,0,0.5);padding:0 4px;">🎈</span>
+    <span id="playerName" style="font-family:&#39;Fredoka One&#39;,cursive;color:#FFB300;font-size:clamp(11px,2.8vw,15px);white-space:nowrap;flex-shrink:0;text-shadow:0 0 10px rgba(255,180,0,0.5);padding:0 4px;">🎈</span>
     <div style="display:flex;flex-direction:column;flex:1;gap:3px">
       <div id="timebar-wrap"><div id="timebar"></div></div>
       <div id="miniWagons" style="display:flex;gap:3px;height:7px;"></div>
     </div>
-    <div id="livesRow"><span class="heart" id="h1">&#10084;&#65039;</span><span class="heart" id="h2">&#10084;&#65039;</span><span class="heart" id="h3">&#10084;&#65039;</span></div>
-    <span id="streakTxt" style="font-family:'Fredoka One',cursive;font-size:11px;min-width:22px;text-align:center;transition:all 0.2s;"></span>
-    <span id="wagonTxt" style="font-family:'Fredoka One',cursive;color:rgba(255,255,255,0.4);font-size:10px;min-width:34px;text-align:center"></span>
-    <button class="hbtn" id="speedDn">&#x1F422;</button>
+    <div id="livesRow"><span class="heart" id="h1">❤️</span><span class="heart" id="h2">❤️</span><span class="heart" id="h3">❤️</span></div>
+    <span id="streakTxt" style="font-family:&#39;Fredoka One&#39;,cursive;font-size:11px;min-width:22px;text-align:center;transition:all 0.2s;"></span>
+    <span id="wagonTxt" style="font-family:&#39;Fredoka One&#39;,cursive;color:rgba(255,255,255,0.4);font-size:10px;min-width:34px;text-align:center"></span>
+    <button class="hbtn" id="speedDn">🐢</button>
     <span id="timeTxt">60</span>
-    <button class="hbtn" id="speedUp">&#x26A1;</button>
-    <button class="hbtn" id="homeBtn">&#x1F3E0;</button>
-    <button class="hbtn" id="retryBtn">&#x1F501;</button>
-    <button class="hbtn" id="pauseBtn">&#x23F8;</button>
-    <button class="hbtn" id="soundBtn">&#x1F50A;</button>
-    <button class="hbtn" id="fullBtn">&#x26F6;</button>
+    <button class="hbtn" id="speedUp">⚡</button>
+    <button class="hbtn" id="homeBtn">🏠</button>
+    <button class="hbtn" id="retryBtn">🔁</button>
+    <button class="hbtn" id="pauseBtn">⏸</button>
+    <button class="hbtn" id="soundBtn">🔊</button>
+    <button class="hbtn" id="fullBtn">⛶</button>
   </div>
   <div id="game">
-    <canvas id="c"></canvas>
+    <canvas id="c" width="2560" height="1271" style="cursor: pointer;"></canvas>
     <div id="uflash"></div>
     <div class="ovl" id="pauseOvl">
       <div class="ovl-bg"></div>
       <div class="card">
-        <h2>&#x23F8; Pausa</h2>
-        <button class="bigBtn" id="resumeBtn">&#x25B6; Continuar</button><br>
-        <button class="smlBtn" id="restartBtn">&#x1F504; Recomeçar</button>
+        <h2>⏸ Pausa</h2>
+        <button class="bigBtn" id="resumeBtn">▶ Continuar</button><br>
+        <button class="smlBtn" id="restartBtn">🔄 Recomeçar</button>
       </div>
     </div>
     <div class="ovl" id="learnOvl" style="display:none">
       <div class="ovl-bg"></div>
       <div id="learnCard" style="position:relative;z-index:1;background:linear-gradient(155deg,#1e0a40,#120828);border:3px solid rgba(255,140,0,0.5);border-radius:28px;padding:clamp(16px,4vw,28px) clamp(18px,5vw,32px);text-align:center;width:min(420px,96%);box-shadow:0 0 50px rgba(255,100,0,0.2)">
         <div id="learnEmoji" style="width:clamp(180px,48vw,280px);height:clamp(180px,48vw,280px);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 0 22px rgba(255,180,0,0.7));animation:floatUp 2s ease-in-out infinite;"></div>
-        <div id="learnName" style="font-family:'Fredoka One',cursive;font-size:clamp(28px,8vw,46px);margin-bottom:4px;">?</div>
+        <div id="learnName" style="font-family:&#39;Fredoka One&#39;,cursive;font-size:clamp(28px,8vw,46px);margin-bottom:4px;">?</div>
         <div id="learnSub" style="font-size:clamp(18px,5vw,26px);margin-bottom:6px;line-height:1.2;color:rgba(255,230,180,1);font-family:&#39;Fredoka One&#39;,cursive;text-shadow:0 1px 4px rgba(0,0,0,0.7);"></div>
         <div id="learnFact" style="color:#ffffff;font-size:clamp(12px,3vw,15px);font-weight:700;line-height:1.75;margin-bottom:14px;min-height:52px;text-shadow:0 1px 4px rgba(0,0,0,0.8);"></div>
         <div id="learnDots" style="display:flex;gap:6px;justify-content:center;margin-bottom:14px;flex-wrap:wrap;"></div>
         <div style="display:flex;gap:8px;justify-content:center;">
-          <button id="learnPrev" style="font-family:'Fredoka One',cursive;background:rgba(255,180,0,0.1);border:1px solid rgba(255,140,0,0.4);color:rgba(255,200,100,0.8);font-size:14px;padding:9px 22px;border-radius:50px;cursor:pointer;touch-action:manipulation;">← Anterior</button>
-          <button id="learnNext" style="font-family:'Fredoka One',cursive;background:linear-gradient(135deg,#ff6d00,#e65100);border:none;color:#fff;font-size:16px;padding:10px 28px;border-radius:50px;cursor:pointer;touch-action:manipulation;">Próximo →</button>
+          <button id="learnPrev" style="font-family:&#39;Fredoka One&#39;,cursive;background:rgba(255,180,0,0.1);border:1px solid rgba(255,140,0,0.4);color:rgba(255,200,100,0.8);font-size:14px;padding:9px 22px;border-radius:50px;cursor:pointer;touch-action:manipulation;">← Anterior</button>
+          <button id="learnNext" style="font-family:&#39;Fredoka One&#39;,cursive;background:linear-gradient(135deg,#ff6d00,#e65100);border:none;color:#fff;font-size:16px;padding:10px 28px;border-radius:50px;cursor:pointer;touch-action:manipulation;">Próximo →</button>
         </div>
         <br>
-        <button id="learnPlay" style="font-family:'Fredoka One',cursive;background:linear-gradient(135deg,#ff6d00,#e65100);border:none;color:#fff;font-size:15px;padding:10px 30px;border-radius:50px;cursor:pointer;touch-action:manipulation;">🎮 Jogar agora!</button>
+        <button id="learnPlay" style="font-family:&#39;Fredoka One&#39;,cursive;background:linear-gradient(135deg,#ff6d00,#e65100);border:none;color:#fff;font-size:15px;padding:10px 30px;border-radius:50px;cursor:pointer;touch-action:manipulation;">🎮 Jogar agora!</button>
         <div id="learnCounter" style="color:rgba(255,200,100,0.4);font-size:11px;font-weight:700;margin-top:10px;"></div>
       </div>
     </div>
-    <div class="ovl" id="mainOvl">
+    <div class="ovl" id="mainOvl" style="display: flex;">
       <div class="ovl-bg"></div>
+      <!-- Robô mascote LIVRE (flutua fora do card) -->
+      <div class="vb-free" id="vbFree">
+        <div class="vb-free-bubble pop" id="vbFreeMsg">Olá! Sou o VanBerto's!<br>Feliz Dia da Criança! 🎈</div>
+        <svg viewBox="0 0 80 80">
+          <defs>
+            <lineargradient id="bgF" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e5f2ff"></stop><stop offset="100%" stop-color="#bfdbfe"></stop></lineargradient>
+            <lineargradient id="vgF" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#22d3ee"></stop><stop offset="100%" stop-color="#38bdf8"></stop></lineargradient>
+          </defs>
+          <circle cx="40" cy="40" r="34" fill="rgba(147,197,253,0.35)"></circle>
+          <rect x="18" y="30" width="44" height="32" rx="14" fill="url(#bgF)"></rect>
+          <circle cx="40" cy="46" r="7" fill="#9ca3af"></circle>
+          <rect x="22" y="10" width="36" height="26" rx="13" fill="url(#bgF)"></rect>
+          <rect x="26" y="15" width="28" height="16" rx="8" fill="url(#vgF)"></rect>
+          <rect x="26" y="15" width="28" height="16" rx="8" fill="#e5f2ff" opacity="0.9" style="transform-origin:40px 23px;animation:vbBlink 5s ease-in-out infinite;"></rect>
+          <circle cx="33" cy="23" r="2.5" fill="#0f172a"></circle>
+          <circle cx="47" cy="23" r="2.5" fill="#0f172a"></circle>
+          <line x1="40" y1="10" x2="40" y2="4" stroke="#38bdf8" stroke-width="2"></line>
+          <circle cx="40" cy="3" r="2.5" fill="#38bdf8" style="animation:vbAntenna 1.4s ease-in-out infinite;"></circle>
+          <rect x="12" y="34" width="6" height="20" rx="3" fill="#e5e7eb" style="transform-origin:15px 44px;animation:waveVBLeft 1.8s ease-in-out infinite;"></rect>
+          <rect x="62" y="34" width="6" height="20" rx="3" fill="#e5e7eb" style="transform-origin:65px 44px;animation:waveVB 1.5s ease-in-out infinite;"></rect>
+          <rect x="22" y="58" width="12" height="8" rx="3" fill="#1f2937"></rect>
+          <rect x="46" y="58" width="12" height="8" rx="3" fill="#1f2937"></rect>
+        </svg>
+      </div>
       <div class="card" id="mainCard" style="padding:0;overflow:hidden;border-radius:28px;border:2px solid rgba(255,180,0,0.6);background:none;width:min(540px,97%);overflow-y:auto;box-shadow:0 0 80px rgba(255,160,0,0.22),0 0 40px rgba(255,210,0,0.12),inset 0 1px 0 rgba(255,255,255,0.06);">
         <div class="modal-hero">
           <div class="modal-title">🎈 Dia da Criança! 🎉</div>
@@ -184,28 +374,77 @@ canvas{display:block;width:100%;height:100%;touch-action:none;}
             <div class="modal-vb-robot">
               <svg viewBox="0 0 80 80">
                 <defs>
-                  <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e5f2ff"/><stop offset="100%" stop-color="#bfdbfe"/></linearGradient>
-                  <linearGradient id="vg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#22d3ee"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient>
+                  <lineargradient id="bg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e5f2ff"></stop><stop offset="100%" stop-color="#bfdbfe"></stop></lineargradient>
+                  <lineargradient id="vg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#22d3ee"></stop><stop offset="100%" stop-color="#38bdf8"></stop></lineargradient>
                 </defs>
-                <circle cx="40" cy="40" r="34" fill="rgba(147,197,253,0.35)"/>
-                <rect x="18" y="30" width="44" height="32" rx="14" fill="url(#bg3)"/>
-                <circle cx="40" cy="46" r="7" fill="#9ca3af"/>
-                <rect x="22" y="10" width="36" height="26" rx="13" fill="url(#bg3)"/>
-                <rect x="26" y="15" width="28" height="16" rx="8" fill="url(#vg3)"/>
-                <rect x="26" y="15" width="28" height="16" rx="8" fill="#e5f2ff" opacity="0.9" style="transform-origin:40px 23px;animation:vbBlink 5s ease-in-out infinite;"/>
-                <circle cx="33" cy="23" r="2.5" fill="#0f172a"/>
-                <circle cx="47" cy="23" r="2.5" fill="#0f172a"/>
-                <line x1="40" y1="10" x2="40" y2="4" stroke="#38bdf8" stroke-width="2"/>
-                <circle cx="40" cy="3" r="2.5" fill="#38bdf8"/>
-                <rect x="12" y="34" width="6" height="20" rx="3" fill="#e5e7eb"/>
-                <rect x="62" y="34" width="6" height="20" rx="3" fill="#e5e7eb" style="transform-origin:65px 44px;animation:waveVB 1.5s ease-in-out infinite;"/>
-                <rect x="22" y="58" width="12" height="8" rx="3" fill="#1f2937"/>
-                <rect x="46" y="58" width="12" height="8" rx="3" fill="#1f2937"/>
+                <circle cx="40" cy="40" r="34" fill="rgba(147,197,253,0.35)"></circle>
+                <rect x="18" y="30" width="44" height="32" rx="14" fill="url(#bg3)"></rect>
+                <circle cx="40" cy="46" r="7" fill="#9ca3af"></circle>
+                <rect x="22" y="10" width="36" height="26" rx="13" fill="url(#bg3)"></rect>
+                <rect x="26" y="15" width="28" height="16" rx="8" fill="url(#vg3)"></rect>
+                <rect x="26" y="15" width="28" height="16" rx="8" fill="#e5f2ff" opacity="0.9" style="transform-origin:40px 23px;animation:vbBlink 5s ease-in-out infinite;"></rect>
+                <circle cx="33" cy="23" r="2.5" fill="#0f172a"></circle>
+                <circle cx="47" cy="23" r="2.5" fill="#0f172a"></circle>
+                <line x1="40" y1="10" x2="40" y2="4" stroke="#38bdf8" stroke-width="2"></line>
+                <circle cx="40" cy="3" r="2.5" fill="#38bdf8" style="animation:vbAntenna 1.4s ease-in-out infinite;"></circle>
+                <rect x="12" y="34" width="6" height="20" rx="3" fill="#e5e7eb" style="transform-origin:15px 44px;animation:waveVBLeft 1.8s ease-in-out infinite;"></rect>
+                <rect x="62" y="34" width="6" height="20" rx="3" fill="#e5e7eb" style="transform-origin:65px 44px;animation:waveVB 1.5s ease-in-out infinite;"></rect>
+                <rect x="22" y="58" width="12" height="8" rx="3" fill="#1f2937"></rect>
+                <rect x="46" y="58" width="12" height="8" rx="3" fill="#1f2937"></rect>
               </svg>
             </div>
-            <div class="modal-vb-balloon" id="modalVbMsg">Olá! Sou o VanBerto's!<br>Feliz Dia da Criança! 🎈</div>
+            <div class="modal-vb-balloon pop" id="modalVbMsg">Olá! Sou o VanBerto's!<br>Feliz Dia da Criança! 🎈</div>
           </div>
-          <div class="modal-balloons" id="modalBalloons"></div>
+          <div class="modal-balloons" id="modalBalloons"><div class="modal-balloon-wrap" style="animation:vbFloat 2s ease-in-out infinite;animation-delay:0s;">
+      <div class="modal-balloon" data-img="carrocel" style="width:clamp(40px,10vw,56px);height:clamp(46px,11.5vw,64px);background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.55),#e91e63 38%,#880e4f);position:relative;overflow:hidden;">
+        <canvas class="mbc" data-img="carrocel" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" width="56" height="64"></canvas>
+      </div>
+      <svg width="14" height="38" viewBox="0 0 14 38" style="overflow:visible;display:block;margin-top:-1px;">
+        <path d="M7,0 Q5,13.299999999999999 6,38" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+      </svg>
+    </div><div class="modal-balloon-wrap" style="animation:vbFloat 2s ease-in-out infinite;animation-delay:0.4s;">
+      <div class="modal-balloon" data-img="urso" style="width:clamp(36px,9vw,50px);height:clamp(42px,10.5vw,58px);background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.55),#8d6e63 38%,#4e342e);position:relative;overflow:hidden;">
+        <canvas class="mbc" data-img="urso" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" width="50" height="58"></canvas>
+      </div>
+      <svg width="14" height="32" viewBox="0 0 14 32" style="overflow:visible;display:block;margin-top:-1px;">
+        <path d="M7,0 Q6,11.2 7,32" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+      </svg>
+    </div><div class="modal-balloon-wrap" style="animation:vbFloat 2s ease-in-out infinite;animation-delay:0.7s;">
+      <div class="modal-balloon" data-img="roda" style="width:clamp(44px,11vw,60px);height:clamp(50px,12.5vw,68px);background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.55),#1e88e5 38%,#0d47a1);position:relative;overflow:hidden;">
+        <canvas class="mbc" data-img="roda" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" width="60" height="68"></canvas>
+      </div>
+      <svg width="14" height="42" viewBox="0 0 14 42" style="overflow:visible;display:block;margin-top:-1px;">
+        <path d="M7,0 Q7,14.7 6,42" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+      </svg>
+    </div><div class="modal-balloon-wrap" style="animation:vbFloat 2s ease-in-out infinite;animation-delay:1.1s;">
+      <div class="modal-balloon" data-img="montanha" style="width:clamp(38px,9.5vw,52px);height:clamp(44px,11vw,60px);background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.55),#00897b 38%,#004d40);position:relative;overflow:hidden;">
+        <canvas class="mbc" data-img="montanha" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" width="52" height="60"></canvas>
+      </div>
+      <svg width="14" height="36" viewBox="0 0 14 36" style="overflow:visible;display:block;margin-top:-1px;">
+        <path d="M7,0 Q5,12.6 7,36" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+      </svg>
+    </div><div class="modal-balloon-wrap" style="animation:vbFloat 2s ease-in-out infinite;animation-delay:0.2s;">
+      <div class="modal-balloon" data-img="bola" style="width:clamp(42px,10.5vw,58px);height:clamp(48px,12vw,66px);background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.55),#e53935 38%,#b71c1c);position:relative;overflow:hidden;">
+        <canvas class="mbc" data-img="bola" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" width="58" height="66"></canvas>
+      </div>
+      <svg width="14" height="40" viewBox="0 0 14 40" style="overflow:visible;display:block;margin-top:-1px;">
+        <path d="M7,0 Q6,14 6,40" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+      </svg>
+    </div><div class="modal-balloon-wrap" style="animation:vbFloat 2s ease-in-out infinite;animation-delay:0.9s;">
+      <div class="modal-balloon" data-img="boneca" style="width:clamp(36px,9vw,48px);height:clamp(42px,10.5vw,56px);background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.55),#ab47bc 38%,#6a1b9a);position:relative;overflow:hidden;">
+        <canvas class="mbc" data-img="boneca" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" width="48" height="56"></canvas>
+      </div>
+      <svg width="14" height="34" viewBox="0 0 14 34" style="overflow:visible;display:block;margin-top:-1px;">
+        <path d="M7,0 Q7,11.899999999999999 7,34" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+      </svg>
+    </div><div class="modal-balloon-wrap" style="animation:vbFloat 2s ease-in-out infinite;animation-delay:0.5s;">
+      <div class="modal-balloon" data-img="bicicleta" style="width:clamp(40px,10vw,54px);height:clamp(46px,11.5vw,62px);background:radial-gradient(circle at 35% 35%,rgba(255,255,255,0.55),#00acc1 38%,#006064);position:relative;overflow:hidden;">
+        <canvas class="mbc" data-img="bicicleta" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;" width="54" height="62"></canvas>
+      </div>
+      <svg width="14" height="38" viewBox="0 0 14 38" style="overflow:visible;display:block;margin-top:-1px;">
+        <path d="M7,0 Q5,13.299999999999999 6,38" stroke="rgba(255,255,255,0.45)" stroke-width="1.5" fill="none" stroke-linecap="round"></path>
+      </svg>
+    </div></div>
         </div>
         <div class="modal-rules">
           <div class="modal-rule"><span class="modal-rule-icon">👆</span><span>Toca nos balões com o <b style="color:#FFB300">brinquedo certo</b> para encheres os vagões!</span></div>
@@ -224,12 +463,12 @@ canvas{display:block;width:100%;height:100%;touch-action:none;}
             <button class="btn-play" id="contBtn" style="background:linear-gradient(135deg,#7b1fa2,#4a148c);font-size:17px;padding:10px 32px;">▶ Continuar Nível <span id="contLvlSpan">1</span></button>
           </div>
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;justify-content:center;">
-            <label style="font-family:'Fredoka One',cursive;color:#FFB300;font-size:13px;white-space:nowrap;">🎈 O teu nome:</label>
-            <input id="playerNameInput" type="text" maxlength="16" placeholder="Escreve o teu nome..." style="font-family:'Fredoka One',cursive;font-size:13px;padding:7px 12px;border-radius:20px;border:2px solid rgba(255,140,0,0.6);background:rgba(0,0,0,0.35);color:#FFD600;outline:none;width:160px;text-align:center;" />
+            <label style="font-family:&#39;Fredoka One&#39;,cursive;color:#FFB300;font-size:13px;white-space:nowrap;">🎈 O teu nome:</label>
+            <input id="playerNameInput" type="text" maxlength="16" placeholder="Escreve o teu nome..." style="font-family:&#39;Fredoka One&#39;,cursive;font-size:13px;padding:7px 12px;border-radius:20px;border:2px solid rgba(255,140,0,0.6);background:rgba(0,0,0,0.35);color:#FFD600;outline:none;width:160px;text-align:center;">
           </div>
           <button class="btn-play" id="homeStartBtn">🎮 Novo Jogo</button>
           <button class="btn-learn" id="tutBtn">🧩 Aprender os brinquedos</button>
-          <p class="credit">Professora: Vanda Várzea &nbsp;🎈&nbsp; Feliz Dia da Criança!</p>
+          <p class="credit">© Professora: Vanda Várzea &nbsp;🎈&nbsp; Feliz Dia da Criança!</p>
         </div>
       </div>
     </div>
@@ -240,7 +479,67 @@ canvas{display:block;width:100%;height:100%;touch-action:none;}
 // Canvas setup
 const cv=document.getElementById('c'),ctx=cv.getContext('2d');
 let W=800,H=500;
-function resize(){const g=document.getElementById('game');W=g.clientWidth;H=g.clientHeight;cv.width=W;cv.height=H;}
+
+// ── Sistema de escala responsivo para PC ──────────────────────────────────
+// Aplica-se apenas em ecrãs de PC (sem touch) com largura ≥ 900px.
+// Escala o #wrap proporcionalmente a partir de 1920×1080 como referência.
+// Em smartphones e tablets não faz nada (o layout fluido existente mantém-se).
+const _wrap = document.getElementById('wrap');
+let _pcScale = 1;
+
+function applyPCScale() {
+  const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  // Só actua em dispositivos sem touch com janela suficientemente larga
+  if (isTouchDevice || vw < 900) {
+    // Repor qualquer transform anterior (caso o user redimensione para mobile)
+    _wrap.style.transform = '';
+    _wrap.style.transformOrigin = '';
+    _wrap.style.width = '';
+    _wrap.style.height = '';
+    _wrap.style.position = 'fixed';
+    _wrap.style.inset = '0';
+    _pcScale = 1;
+    return;
+  }
+  // Calcular escala: referência 1920×1080
+  const scaleX = vw / 1920;
+  const scaleY = vh / 1080;
+  _pcScale = Math.min(scaleX, scaleY);
+  if (_pcScale >= 1) {
+    // Ecrã maior ou igual à referência — sem scaling
+    _wrap.style.transform = '';
+    _wrap.style.transformOrigin = '';
+    _wrap.style.width = '';
+    _wrap.style.height = '';
+    _wrap.style.position = 'fixed';
+    _wrap.style.inset = '0';
+    _pcScale = 1;
+    return;
+  }
+  // Dimensões do conteúdo em escala 1:1
+  const scaledW = 1920 * _pcScale;
+  const scaledH = 1080 * _pcScale;
+  // Centrar na janela
+  const offsetX = (vw - scaledW) / 2;
+  const offsetY = (vh - scaledH) / 2;
+  // Aplicar: o #wrap tem dimensões de referência e é escalado + centrado
+  _wrap.style.position = 'fixed';
+  _wrap.style.inset = 'auto';
+  _wrap.style.top = offsetY + 'px';
+  _wrap.style.left = offsetX + 'px';
+  _wrap.style.width = '1920px';
+  _wrap.style.height = '1080px';
+  _wrap.style.transformOrigin = 'top left';
+  _wrap.style.transform = 'scale(' + _pcScale + ')';
+}
+
+function resize(){
+  applyPCScale();
+  const g=document.getElementById('game');
+  W=g.clientWidth;H=g.clientHeight;
+  cv.width=W;cv.height=H;
+}
 resize();
 window.addEventListener('resize',()=>{resize();if(state!=='idle'){computeDims();rebuildTrain();}});
 // Fundo animado desde o início
@@ -2067,7 +2366,19 @@ function bindLearnButtons() {
 // VanBerto mensagens rotativas
 const VB_MSGS=["Olá! Sou o VanBerto's!<br>Feliz Dia da Criança! 🎈","Toca nos balões do brinquedo certo<br>para encheres o comboio! 🚂","Começa pelo Modo Aprender<br>se é a primeira vez! 🧩","Com 3 vidas e atenção,<br>lá chegamos ao fim! 🏆","Apanha as ampulhetas<br>para ganhar mais tempo! ⌛"];
 let vbMsgIdx=0;
-function rotateVbMsg(){const el=document.getElementById('modalVbMsg');if(el){vbMsgIdx=(vbMsgIdx+1)%VB_MSGS.length;el.innerHTML=VB_MSGS[vbMsgIdx];}setTimeout(rotateVbMsg,3500);}
+function rotateVbMsg(){
+  const el=document.getElementById('modalVbMsg');
+  const elFree=document.getElementById('vbFreeMsg');
+  vbMsgIdx=(vbMsgIdx+1)%VB_MSGS.length;
+  if(el){el.innerHTML=VB_MSGS[vbMsgIdx];el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');}
+  if(elFree){
+    elFree.innerHTML=VB_MSGS[vbMsgIdx];
+    elFree.classList.remove('pop');
+    void elFree.offsetWidth;
+    elFree.classList.add('pop');
+  }
+  setTimeout(rotateVbMsg,3500);
+}
 setTimeout(rotateVbMsg,3500);
 
 function renderModalBalloons(){
@@ -2179,6 +2490,8 @@ document.fonts.ready.then(()=>{
 </script>
 
 
-</body>
-</html>
+<script defer="" src="./Dia da Criança 🎈_files/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;7f7b0fd8732c4326aae4b9d58d5c514a&quot;,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
 
+
+
+</body></html>
