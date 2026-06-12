@@ -517,8 +517,12 @@ function resize(){
   const g=document.getElementById('game');
   W=g.clientWidth||window.innerWidth;
   H=g.clientHeight||window.innerHeight;
-  cv.width=W;
-  cv.height=H;
+  const dpr=window.devicePixelRatio||1;
+  cv.width=W*dpr;
+  cv.height=H*dpr;
+  cv.style.width=W+'px';
+  cv.style.height=H+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
 }
 resize();
 window.addEventListener('resize',()=>{resize();if(state!=='idle'){computeDims();rebuildTrain();}});
@@ -859,7 +863,7 @@ function spawnWave(){
   while(arr.length<total){if(Math.random()<0.65)arr.push(makeBalloon(pick(ufc),false));else{const wr=COLORS.filter(c=>!ufc.find(u=>u.name===c.name));arr.push(makeBalloon(wr.length?pick(wr):pick(COLORS),false));}}
   if(cfg.hourglassChance>0&&Math.random()<cfg.hourglassChance)arr.push(makeBalloon(null,true));
   if(level>=3){const sc=Math.min(0.25,0.08+(level-3)*0.015),bc=Math.min(0.20,0.06+(level-5)*0.012),roll=Math.random();if(roll<sc)arr.push(makeBalloon(null,false,'star'));else if(level>=5&&roll<sc+bc)arr.push(makeBalloon(null,false,'bomb'));}
-  shuffle(arr).forEach((b,i)=>{b.x=W+b.r+i*Math.round(S(90))+rnd(0,S(20));});balloons.push(...arr);
+  shuffle(arr).forEach((b,i)=>{b.x=W+b.r+i*Math.round(S(45))+rnd(0,S(15));});balloons.push(...arr);
 }
 
 // Fundo festivo
